@@ -1,7 +1,8 @@
 namespace API.Entities
 {
-    public class Products
+    public class Product
     {
+        // these are colums in our db table
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

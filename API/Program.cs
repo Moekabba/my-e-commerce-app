@@ -31,4 +31,20 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// create dbmigrate and seed in program.cs
+var scope = app.Services.CreateScope(); //
+var context = scope.ServiceProvider.GetRequiredService<StoreContext>(); // get hold of store context
+// use this to log error
+var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+try
+{
+    context.Database.Migrate();
+    Dbinitializer.Initialize(context);
+}
+catch (Exception ex)
+{
+    
+    logger.LogError(ex, "something went wrong during migration");
+}
+
 app.Run();
